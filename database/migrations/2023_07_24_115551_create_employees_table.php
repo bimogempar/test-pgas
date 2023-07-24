@@ -13,11 +13,11 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('employee', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('departmentId');
-            $table->foreign('departmentId')->references('id')->on('departments')->onDelete('cascade');
+            $table->foreign('departmentId')->references('id')->on('department')->onDelete('cascade');
             $table->timestamps();
         });
     }

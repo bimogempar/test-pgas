@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SpendingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,4 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/employee', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
 Route::get('/department', [DepartmentController::class, 'getDepartment'])->name('getDepartment');
+Route::get('/spending', [SpendingController::class, 'getSpending'])->name('getSpending');

@@ -15,6 +15,19 @@
     </div>
 
     <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '{{ route('getEmployee') }}',
+                method: 'GET',
+                success: function(response) {
+                    $('#table').html(response);
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            })
+        })
+
         $('#getEmp').click(function() {
             $.ajax({
                 url: '{{ route('getEmployee') }}',
@@ -31,6 +44,19 @@
         $('#getDept').click(function() {
             $.ajax({
                 url: '{{ route('getDepartment') }}',
+                method: 'GET',
+                success: function(response) {
+                    $('#table').html(response);
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            })
+        })
+
+        $('#getSpend').click(function() {
+            $.ajax({
+                url: '{{ route('getSpending') }}',
                 method: 'GET',
                 success: function(response) {
                     $('#table').html(response);

@@ -13,10 +13,12 @@ class CreateSpendingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('spendings', function (Blueprint $table) {
+        Schema::create('spending', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employeeId');
-            $table->foreign('employeeId')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('employeeId')->references('id')->on('employee')->onDelete('cascade');
+            $table->timestamp('date');
+            $table->integer('value');
             $table->timestamps();
         });
     }

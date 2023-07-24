@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
+
+    protected $table = 'department';
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'departmentId', 'id');
+    }
+
+    public function getDepartments()
+    {
+        $departments = Department::with('employees')->get();
+        return $departments;
+    }
 }
