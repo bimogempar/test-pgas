@@ -27,7 +27,7 @@
 
         <div>
             <label for="role">Role</label>
-            <select name="role" id="role">
+            <select name="role" id="role" required>
                 <option value="admin" selected>Admin</option>
                 <option value="user">User</option>
             </select>
