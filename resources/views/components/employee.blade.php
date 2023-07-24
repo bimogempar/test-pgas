@@ -18,9 +18,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($employees as $emp)
+        @foreach ($employees as $idx => $emp)
             <tr>
-                <td>{{ $emp->id }}</td>
+                <td>{{ $idx + 1 }}</td>
                 <td>{{ $emp->name }}</td>
                 <td>{{ $emp->departments->name }}</td>
             </tr>

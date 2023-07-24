@@ -21,6 +21,11 @@ Route::middleware('admin')->group(function () {
     Route::get('/', function () {
         return view('home');
     })->name('home');
+
+    Route::get('/employee', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
+    Route::get('/department', [DepartmentController::class, 'getDepartment'])->name('getDepartment');
+    Route::get('/spending', [SpendingController::class, 'getSpending'])->name('getSpending');
+    Route::get('/export-spending', [SpendingController::class, 'getExportSpending'])->name('getExportSpending');
 });
 
 Route::get('/login', [UserController::class, 'loginPage'])->name('login');
@@ -28,7 +33,3 @@ Route::post('/login', [UserController::class, 'doLogin'])->name('doLogin');
 Route::get('/register', [UserController::class, 'registerPage'])->name('register');
 Route::post('/register', [UserController::class, 'doRegister'])->name('doRegister');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
-Route::get('/employee', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
-Route::get('/department', [DepartmentController::class, 'getDepartment'])->name('getDepartment');
-Route::get('/spending', [SpendingController::class, 'getSpending'])->name('getSpending');

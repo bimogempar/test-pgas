@@ -35,7 +35,12 @@ class EmployeeController extends Controller
 
         if ($request->query('search') !== null) {
             $search = $request->query('search');
-            $employees->where('name', 'ilike', '%' . $search . '%');
+            $employees->where('name', 'ilike', '%' . $search . '%')
+                ->orWhere(function ($dept) use ($search) {
+                    $dept->whereHas('departments', function ($q) use ($search) {
+                        $q->where('name', 'ilike', '%' . $search . '%');
+                    });
+                });
         }
 
         $employees = $employees->get();

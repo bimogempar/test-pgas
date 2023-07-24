@@ -9,9 +9,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($spendings as $spd)
+        @foreach ($spendings as $idx => $spd)
             <tr>
-                <td>{{ $spd->id }}</td>
+                <td>{{ $idx + 1 }}</td>
                 <td>{{ $spd->employees->name }}</td>
                 <td>{{ $spd->employees->departments->name }}</td>
                 <td>{{ $spd->date }}</td>
