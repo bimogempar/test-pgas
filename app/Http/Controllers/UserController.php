@@ -14,7 +14,7 @@ class UserController extends Controller
         return view('login');
     }
 
-    public function attemptLogin(Request $request)
+    public function doLogin(Request $request)
     {
         $input = $request->validate([
             'email' => 'required|email',
@@ -35,7 +35,7 @@ class UserController extends Controller
         return view('register');
     }
 
-    public function submitRegister(Request $request)
+    public function doRegister(Request $request)
     {
         $input = $request->validate([
             'name' => 'required|string',
@@ -47,6 +47,7 @@ class UserController extends Controller
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'role' => 'user',
         ]);
 
         Auth::login($user);

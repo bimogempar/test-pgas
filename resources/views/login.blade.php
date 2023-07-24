@@ -6,8 +6,8 @@
 </head>
 
 <body>
-    <a href="{{ route('login') }}">Register page</a>
-    <form method="POST" action="{{ route('login') }}">
+    <a href="{{ route('register') }}">Register page</a>
+    <form method="POST" action="{{ route('doLogin') }}">
         @csrf
 
         <div>

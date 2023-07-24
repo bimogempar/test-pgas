@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +23,10 @@ Route::middleware('admin')->group(function () {
 });
 
 Route::get('/login', [UserController::class, 'loginPage'])->name('login');
-Route::post('/login', [UserController::class, 'attemptLogin'])->name('attemptLogin');
+Route::post('/login', [UserController::class, 'doLogin'])->name('doLogin');
 Route::get('/register', [UserController::class, 'registerPage'])->name('register');
-Route::post('/register', [UserController::class, 'submitRegister'])->name('submitRegister');
+Route::post('/register', [UserController::class, 'doRegister'])->name('doRegister');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/employee', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
+Route::get('/department', [DepartmentController::class, 'getDepartment'])->name('getDepartment');
