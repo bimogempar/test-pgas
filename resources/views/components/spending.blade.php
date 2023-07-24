@@ -3,6 +3,7 @@
         <tr>
             <th>ID</th>
             <th>Employee</th>
+            <th>Departments</th>
             <th>Date</th>
             <th>Value</th>
         </tr>
@@ -12,6 +13,7 @@
             <tr>
                 <td>{{ $spd->id }}</td>
                 <td>{{ $spd->employees->name }}</td>
+                <td>{{ $spd->employees->departments->name }}</td>
                 <td>{{ $spd->date }}</td>
                 <td>{{ $spd->value }}</td>
             </tr>

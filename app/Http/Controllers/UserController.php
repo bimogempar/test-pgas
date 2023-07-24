@@ -41,13 +41,14 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email',
             'password' => 'required',
+            'role' => 'required'
         ]);
 
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-            'role' => 'user',
+            'role' => $input['role'],
         ]);
 
         Auth::login($user);

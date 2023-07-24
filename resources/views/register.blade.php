@@ -26,6 +26,14 @@
         </div>
 
         <div>
+            <label for="role">Role</label>
+            <select name="role" id="role">
+                <option value="admin" selected>Admin</option>
+                <option value="user">User</option>
+            </select>
+        </div>
+
+        <div>
             <button type="submit">Login</button>
         </div>
     </form>
