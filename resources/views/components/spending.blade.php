@@ -1,3 +1,6 @@
+<div class="flex justify-end">
+    <button class="bg-gray-600 text-white p-2 rounded-lg" id="downloadExcel">Download Excel</button>
+</div>
 <table class="table w-full lg:w-1/2 text-gray-400 border-separate space-y-6 text-sm">
     <thead class="bg-gray-600 text-white">
         <tr>
@@ -52,3 +55,12 @@
         border-radius: 0 .625rem .625rem 0;
     }
 </style>
+
+<script>
+    $(document).ready(function() {
+        $('#downloadExcel').on('click', function() {
+            const url = '{{ route('getExportSpending') }}'
+            window.open(url, '_blank');
+        })
+    })
+</script>
