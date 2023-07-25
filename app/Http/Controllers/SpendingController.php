@@ -29,4 +29,33 @@ class SpendingController extends Controller
     {
         return Excel::download(new SpendingExport(), 'spending.xlsx');
     }
+
+    public function doDeleteSpending($spendId)
+    {
+        $spend = Spending::find($spendId);
+
+        if (!$spend) {
+            return response()->json(['message' => 'Spending not found.'], 404);
+        }
+
+        $spend->delete();
+        return response()->json(['message' => 'Spending deleted successfully.'], 200);
+    }
+
+    public function doUpdateSpending($spendId, Request $request)
+    {
+        $spend = Spending::find($spendId);
+
+        if (!$spend) {
+            return response()->json(['message' => 'Spending not found.'], 404);
+        }
+
+        $input = $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        $spend->name = $input['name'];
+        $spend->save();
+        return response()->json(['message' => 'Spending updated successfully.'], 200);
+    }
 }

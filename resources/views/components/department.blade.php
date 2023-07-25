@@ -17,10 +17,6 @@
                 </td>
                 <td class="p-3 ">
                     <a id="{{ $dept }}"
-                        class="view-dept hover:cursor-pointer text-gray-400 hover:text-gray-500 mr-2">
-                        <i class="material-icons-outlined text-base">visibility</i>
-                    </a>
-                    <a id="{{ $dept }}"
                         class="edit-dept openModalBtn hover:cursor-pointer text-gray-400 hover:text-gray-500  mx-2">
                         <i class="material-icons-outlined text-base">edit</i>
                     </a>

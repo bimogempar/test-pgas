@@ -34,13 +34,16 @@
                     {{ number_format($spd->value, 0, ',', '.') }}
                 </td>
                 <td class="p-3 ">
-                    <a href="#" class="text-gray-400 hover:text-gray-500 mr-2">
+                    <a id="{{ $spd }}"
+                        class="view-spd hover:cursor-pointer text-gray-400 hover:text-gray-500 mr-2">
                         <i class="material-icons-outlined text-base">visibility</i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500  mx-2">
+                    <a id="{{ $spd }}"
+                        class="edit-spd hover:cursor-pointer openModalBtn text-gray-400 hover:text-gray-500  mx-2">
                         <i class="material-icons-outlined text-base">edit</i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500  ml-2">
+                    <a id="{{ $spd }}"
+                        class="delete-spd hover:cursor-pointer text-gray-400 hover:text-gray-500  ml-2">
                         <i class="material-icons-round text-base">delete_outline</i>
                     </a>
                 </td>
@@ -58,9 +61,42 @@
 
 <script>
     $(document).ready(function() {
+        $('.openModalBtn').click(function() {
+            $('#myModal').removeClass('hidden');
+        });
+
+        $('#closeModalBtn').click(function() {
+            $('#myModal').addClass('hidden');
+        });
+
         $('#downloadExcel').on('click', function() {
             const url = '{{ route('getExportSpending') }}'
             window.open(url, '_blank');
+        })
+
+        $('.delete-spd').on('click', function() {
+            if ("{{ auth()->check() }}") {
+                if ("{{ auth()->user()->role }}" == 'admin') {
+                    const spend = JSON.parse($(this).attr('id'));
+                    const validate = confirm('Are you sure you want to delete this spend ' + spend
+                        .employees.name + ' ?')
+                    if (validate) {
+                        $.ajax({
+                            url: '/delete-spending/' + spend.id,
+                            method: 'DELETE',
+                            success: function(response) {
+                                alert(response.message);
+                                window.location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                alert('Error deleting spending: ' + xhr.responseText);
+                            }
+                        })
+                    }
+                } else {
+                    alert("You are not allowed to delete")
+                }
+            }
         })
     })
 </script>

@@ -31,6 +31,8 @@ Route::middleware('admin')->group(function () {
     Route::post('/update-emp/{id}', [EmployeeController::class, 'doUpdateEmployee'])->name('doUpdateEmployee');
 
     Route::get('/spending', [SpendingController::class, 'getSpending'])->name('getSpending');
+    Route::delete('/delete-spending/{id}', [SpendingController::class, 'doDeleteSpending'])->name('doDeleteSpending');
+    Route::post('/update-spending/{id}', [SpendingController::class, 'doUpdateSpending'])->name('doUpdateSpending');
     Route::get('/export-spending', [SpendingController::class, 'getExportSpending'])->name('getExportSpending');
 });
 
