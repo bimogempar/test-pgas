@@ -99,7 +99,6 @@
 
         $('.view-emp').on('click', function() {
             const emp = JSON.parse($(this).attr('id'));
-            console.log(emp)
             alert("Employee " + emp.name + " <from></from> department " + emp.departments.name)
         })
 
