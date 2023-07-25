@@ -46,4 +46,14 @@ class EmployeeController extends Controller
         $employees = $employees->get();
         return view('components.employee', compact('employees', 'departments', 'deptId', 'search'));
     }
+
+    public function doDeleteEmployee($empId)
+    {
+        $emp = Employee::find($empId);
+        if (!$emp) {
+            return response()->json(['message' => 'Employee not found.'], 404);
+        }
+        $emp->delete();
+        return response()->json(['message' => 'Employee deleted successfully.'], 200);
+    }
 }
