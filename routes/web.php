@@ -29,6 +29,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/employee', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
     Route::delete('/delete-emp/{id}', [EmployeeController::class, 'doDeleteEmployee'])->name('doDeleteEmployee');
     Route::post('/update-emp/{id}', [EmployeeController::class, 'doUpdateEmployee'])->name('doUpdateEmployee');
+    Route::post('/create-emp', [EmployeeController::class, 'doSaveEmployee'])->name('doSaveEmployee');
 
     Route::get('/spending', [SpendingController::class, 'getSpending'])->name('getSpending');
     Route::delete('/delete-spending/{id}', [SpendingController::class, 'doDeleteSpending'])->name('doDeleteSpending');

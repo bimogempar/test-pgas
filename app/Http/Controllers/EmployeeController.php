@@ -75,4 +75,18 @@ class EmployeeController extends Controller
         $emp->save();
         return response()->json(['message' => 'Employee updated successfully.'], 200);
     }
+
+    public function doSaveEmployee(Request $request)
+    {
+        $input = $request->validate([
+            'name' => 'required|string',
+            'departmentId' => 'required',
+        ]);
+
+        Employee::create([
+            'name' => $input['name'],
+            'departmentId' => intval($input['departmentId']),
+        ]);
+        return response()->json(['message' => 'Employee added successfully.'], 200);
+    }
 }

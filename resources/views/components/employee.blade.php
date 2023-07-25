@@ -1,17 +1,23 @@
-<div class="flex space-x-4">
-    <select class="p-2 border-2 rounded-xl" name="departmentId" id="departmentId">
-        <option value="">All Departments</option>
-        @foreach ($departments as $department)
-            <option value="{{ $department->id }}" @if ($department->id == $deptId) selected @endif>
-                {{ $department->name }}
-            </option>
-        @endforeach
-    </select>
+<div class="flex justify-between items-center w-full lg:w-1/2">
     <div class="flex space-x-4">
-        <input class="p-2 border-2 rounded-xl w-full" type="text" id="searchInput" placeholder="Search..."
-            value="{{ $search }}">
-        <button class="p-2 border-2 rounded-xl bg-gray-600 text-white hover:bg-gray-400" type="button"
-            id="searchButton">Search</button>
+        <select class="p-2 border-2 rounded-xl" name="departmentId" id="departmentId">
+            <option value="">All Departments</option>
+            @foreach ($departments as $department)
+                <option value="{{ $department->id }}" @if ($department->id == $deptId) selected @endif>
+                    {{ $department->name }}
+                </option>
+            @endforeach
+        </select>
+        <div class="flex space-x-4">
+            <input class="p-2 border-2 rounded-xl w-full" type="text" id="searchInput" placeholder="Search..."
+                value="{{ $search }}">
+            <button class="p-2 border-2 rounded-xl bg-gray-600 text-white hover:bg-gray-400" type="button"
+                id="searchButton">Search</button>
+        </div>
+    </div>
+    <div>
+        <button class="p-2 border-2 rounded-xl bg-gray-600 text-white hover:bg-gray-400" id="buttonAddEmp">Add new
+            Employee</button>
     </div>
 </div>
 
@@ -59,6 +65,7 @@
 </table>
 
 @include('components.modal.editEmployee')
+@include('components.modal.addEmployee')
 
 <style>
     tr td:nth-child(n+3),
@@ -161,5 +168,28 @@
             })
             $('#myModal').addClass('hidden');
         });
+
+        $('#buttonAddEmp').on('click', function() {
+            $('#modalAddEmp').removeClass('hidden');
+        })
+        $('#closeModalAddEmp').on('click', function() {
+            $('#modalAddEmp').addClass('hidden');
+        })
+        $('#submitAdd').on('click', function() {
+            const bodyReq = $('#addFormEmp').serialize()
+            $.ajax({
+                url: '{{ route('doSaveEmployee') }}',
+                method: 'POST',
+                data: bodyReq,
+                success: function(res) {
+                    alert(res.message);
+                    window.location.reload();
+                },
+                error: function(xhr, status, error) {
+                    alert('Error adding employee: ' + xhr.responseText);
+                }
+            })
+            $('#modalAddEmp').addClass('hidden');
+        })
     })
 </script>
