@@ -27,7 +27,7 @@
         @foreach ($employees as $idx => $emp)
             <tr class="bg-white">
                 <td class="p-3">
-                    <div class="flex items-center px-12 space-x-6">
+                    <div class="flex items-center justify-center space-x-6">
                         <img class="rounded-full h-12 w-12 border-2 object-cover"
                             src="https://www.gotosovie.com/wp-content/uploads/woocommerce-placeholder.png"
                             alt="unsplash image">
@@ -159,10 +159,10 @@
                     window.location.reload();
                 },
                 error: function(xhr, status, error) {
-                    alert('Error deleting employee: ' + xhr.responseText);
+                    alert('Error updating employee: ' + xhr.responseText);
                 }
             })
-            // $('#myModal').addClass('hidden');
+            $('#myModal').addClass('hidden');
         });
     })
 </script>

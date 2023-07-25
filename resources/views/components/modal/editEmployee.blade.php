@@ -2,7 +2,7 @@
     <div class="fixed inset-0 bg-black opacity-50"></div>
     <div class="bg-white p-4 rounded-lg shadow-lg z-10 w-1/2">
         <!-- Modal content here -->
-        <h2 class="text-xl font-bold mb-4">Modal Title</h2>
+        <h2 class="text-xl font-bold mb-4">Edit Employe</h2>
         <div>
             <form id="editForm" class="flex flex-col gap-2">
                 <input type="hidden" id="employeeId" name="employeeId" value="">

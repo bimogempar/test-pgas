@@ -18,7 +18,7 @@ class Department extends Model
 
     public function getDepartments()
     {
-        $departments = Department::with('employees')->get();
+        $departments = Department::with('employees')->orderBy('updated_at', 'asc')->get();
         return $departments;
     }
 }

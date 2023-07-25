@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         return response()->json(['message' => 'Employee deleted successfully.'], 200);
     }
 
-    public function doUpdateEmpEmployee($empId, Request $request)
+    public function doUpdateEmployee($empId, Request $request)
     {
         $emp = Employee::find($empId);
 

@@ -22,13 +22,16 @@ Route::middleware('admin')->group(function () {
         return view('home');
     })->name('home');
 
-    Route::get('/employee', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
     Route::get('/department', [DepartmentController::class, 'getDepartment'])->name('getDepartment');
+    Route::delete('/delete-dept/{id}', [DepartmentController::class, 'doDeleteDepartment'])->name('doDeleteDepartment');
+    Route::post('/update-dept/{id}', [DepartmentController::class, 'doUpdateDepartment'])->name('doUpdateDepartment');
+
+    Route::get('/employee', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
+    Route::delete('/delete-emp/{id}', [EmployeeController::class, 'doDeleteEmployee'])->name('doDeleteEmployee');
+    Route::post('/update-emp/{id}', [EmployeeController::class, 'doUpdateEmployee'])->name('doUpdateEmployee');
+
     Route::get('/spending', [SpendingController::class, 'getSpending'])->name('getSpending');
     Route::get('/export-spending', [SpendingController::class, 'getExportSpending'])->name('getExportSpending');
-
-    Route::delete('/delete-emp/{id}', [EmployeeController::class, 'doDeleteEmployee'])->name('doDeleteEmployee');
-    Route::post('/update-emp/{id}', [EmployeeController::class, 'doUpdateEmpEmployee'])->name('doUpdateEmpEmployee');
 });
 
 Route::get('/login', [UserController::class, 'loginPage'])->name('login');
