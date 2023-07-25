@@ -43,7 +43,7 @@ class EmployeeController extends Controller
                 });
         }
 
-        $employees = $employees->get();
+        $employees = $employees->orderBy('updated_at', 'asc')->get();
         return view('components.employee', compact('employees', 'departments', 'deptId', 'search'));
     }
 
@@ -60,5 +60,19 @@ class EmployeeController extends Controller
     public function doUpdateEmpEmployee($empId, Request $request)
     {
         $emp = Employee::find($empId);
+
+        if (!$emp) {
+            return response()->json(['message' => 'Employee not found.'], 404);
+        }
+
+        $input = $request->validate([
+            'name' => 'required|string',
+            'departmentId' => 'required',
+        ]);
+
+        $emp->name = $input['name'];
+        $emp->departmentId = $input['departmentId'];
+        $emp->save();
+        return response()->json(['message' => 'Employee updated successfully.'], 200);
     }
 }

@@ -5,6 +5,7 @@
         <h2 class="text-xl font-bold mb-4">Modal Title</h2>
         <div>
             <form id="editForm" class="flex flex-col gap-2">
+                <input type="hidden" id="employeeId" name="employeeId" value="">
                 <div class="flex flex-col gap-2">
                     <label for="name">Name</label>
                     <input type="text" id="editName" name="name" class="w-1/2 p-2 border-2 rounded-lg">

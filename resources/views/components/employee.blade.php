@@ -103,9 +103,6 @@
                         $.ajax({
                             url: '/delete-emp/' + id,
                             method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
                             success: function(response) {
                                 alert(response.message);
                                 window.location.reload();
@@ -126,6 +123,7 @@
                 if ("{{ auth()->user()->role }}" == 'admin') {
                     const emp = JSON.parse($(this).attr('id'));
                     console.log(emp);
+                    $('#employeeId').val(emp.id);
                     $('#editName').val(emp.name);
                     $('#editDepartmentId').val(emp.departmentId);
                 } else {
@@ -143,10 +141,21 @@
         });
 
         $('#submitEdit').click(function() {
-            $('#editForm').submit(function() {
-                console.log('click submitedit')
+            const bodyReq = $('#editForm').serialize()
+            const empId = $('#employeeId').val()
+            $.ajax({
+                url: '/update-emp/' + empId,
+                method: 'POST',
+                data: bodyReq,
+                success: function(res) {
+                    alert(res.message);
+                    window.location.reload();
+                },
+                error: function(xhr, status, error) {
+                    alert('Error deleting employee: ' + xhr.responseText);
+                }
             })
-            $('#myModal').addClass('hidden');
+            // $('#myModal').addClass('hidden');
         });
     })
 </script>
