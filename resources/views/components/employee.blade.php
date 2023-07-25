@@ -1,32 +1,65 @@
-<select name="departmentId" id="departmentId">
-    <option value="">All Departments</option>
-    @foreach ($departments as $department)
-        <option value="{{ $department->id }}" @if ($department->id == $deptId) selected @endif>{{ $department->name }}
-        </option>
-    @endforeach
-</select>
+<div class="flex space-x-4">
+    <select class="p-2 border-2 rounded-xl" name="departmentId" id="departmentId">
+        <option value="">All Departments</option>
+        @foreach ($departments as $department)
+            <option value="{{ $department->id }}" @if ($department->id == $deptId) selected @endif>
+                {{ $department->name }}
+            </option>
+        @endforeach
+    </select>
+    <div class="flex space-x-4">
+        <input class="p-2 border-2 rounded-xl w-full" type="text" id="searchInput" placeholder="Search..."
+            value="{{ $search }}">
+        <button class="p-2 border-2 rounded-xl" type="button" id="searchButton">Search</button>
+    </div>
+</div>
 
-<input type="text" id="searchInput" placeholder="" value="{{ $search }}">
-<button type="button" id="searchButton">Search</button>
-
-<table>
-    <thead>
+<table class="table w-full lg:w-1/2 text-gray-400 border-separate space-y-6 text-sm">
+    <thead class="bg-gray-600 text-white">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Department</th>
+            <th class="p-3">Name</th>
+            <th class="p-3 text-left">Department</th>
+            <th class="p-3 text-left">Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($employees as $idx => $emp)
-            <tr>
-                <td>{{ $idx + 1 }}</td>
-                <td>{{ $emp->name }}</td>
-                <td>{{ $emp->departments->name }}</td>
+            <tr class="bg-white">
+                <td class="p-3">
+                    <div class="flex items-center px-12 space-x-6">
+                        <img class="rounded-full h-12 w-12 border-2 object-cover"
+                            src="https://www.gotosovie.com/wp-content/uploads/woocommerce-placeholder.png"
+                            alt="unsplash image">
+                        <div class="ml-3">
+                            <div class="text-gray-500">{{ $emp->name }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="p-3">
+                    {{ $emp->departments->name }}
+                </td>
+                <td class="p-3 ">
+                    <a href="#" class="text-gray-400 hover:text-gray-500 mr-2">
+                        <i class="material-icons-outlined text-base">visibility</i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500  mx-2">
+                        <i class="material-icons-outlined text-base">edit</i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500  ml-2">
+                        <i class="material-icons-round text-base">delete_outline</i>
+                    </a>
+                </td>
             </tr>
         @endforeach
     </tbody>
 </table>
+
+<style>
+    tr td:nth-child(n+3),
+    tr th:nth-child(n+3) {
+        border-radius: 0 .625rem .625rem 0;
+    }
+</style>
 
 <script>
     $(document).ready(function() {
