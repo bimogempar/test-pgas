@@ -40,13 +40,16 @@
                     {{ $emp->departments->name }}
                 </td>
                 <td class="p-3">
-                    <a id="{{ $emp->id }}" class="view-emp text-gray-400 hover:text-gray-500 mr-2">
+                    <a id="{{ $emp }}"
+                        class="hover:cursor-pointer view-emp text-gray-400 hover:text-gray-500 mr-2">
                         <i class="material-icons-outlined text-base">visibility</i>
                     </a>
-                    <a id="{{ $emp }}" class="edit-emp openModalBtn text-gray-400 hover:text-gray-500  mx-2">
+                    <a id="{{ $emp }}"
+                        class="hover:cursor-pointer edit-emp openModalBtn text-gray-400 hover:text-gray-500  mx-2">
                         <i class="material-icons-outlined text-base">edit</i>
                     </a>
-                    <a id="{{ $emp->id }}" class="delete-emp text-gray-400 hover:text-gray-500  ml-2">
+                    <a id="{{ $emp->id }}"
+                        class="hover:cursor-pointer delete-emp text-gray-400 hover:text-gray-500  ml-2">
                         <i class="material-icons-round text-base">delete_outline</i>
                     </a>
                 </td>
@@ -94,6 +97,12 @@
             })
         }
 
+        $('.view-emp').on('click', function() {
+            const emp = JSON.parse($(this).attr('id'));
+            console.log(emp)
+            alert("Employee " + emp.name + " <from></from> department " + emp.departments.name)
+        })
+
         $('.delete-emp').on('click', function() {
             if ("{{ auth()->check() }}") {
                 if ("{{ auth()->user()->role }}" == 'admin') {
@@ -122,7 +131,6 @@
             if ("{{ auth()->check() }}") {
                 if ("{{ auth()->user()->role }}" == 'admin') {
                     const emp = JSON.parse($(this).attr('id'));
-                    console.log(emp);
                     $('#employeeId').val(emp.id);
                     $('#editName').val(emp.name);
                     $('#editDepartmentId').val(emp.departmentId);
