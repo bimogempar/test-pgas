@@ -99,7 +99,7 @@
 
         $('.view-emp').on('click', function() {
             const emp = JSON.parse($(this).attr('id'));
-            alert("Employee " + emp.name + " <from></from> department " + emp.departments.name)
+            alert("Employee " + emp.name + " from department " + emp.departments.name)
         })
 
         $('.delete-emp').on('click', function() {

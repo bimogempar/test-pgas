@@ -28,7 +28,7 @@
                     {{ $spd->date }}
                 </td>
                 <td class="p-3">
-                    {{ $spd->value }}
+                    {{ number_format($spd->value, 0, ',', '.') }}
                 </td>
                 <td class="p-3 ">
                     <a href="#" class="text-gray-400 hover:text-gray-500 mr-2">
