@@ -52,6 +52,8 @@
     </tbody>
 </table>
 
+@include('components.modal.editSpending')
+
 <style>
     tr td:nth-child(n+5),
     tr th:nth-child(n+5) {
@@ -98,5 +100,39 @@
                 }
             }
         })
+
+        $('.edit-spd').on('click', function() {
+            if ("{{ auth()->check() }}") {
+                if ("{{ auth()->user()->role }}" == 'admin') {
+                    const spend = JSON.parse($(this).attr('id'));
+                    $('#spendId').val(spend.id);
+                    $('#editEmpId').val(spend.employeeId);
+                    $('#editDepartmentId').val(spend.employees.departmentId);
+                    $('#dateSpend').val(moment(spend.date, 'D-F-Y').format(
+                        'YYYY-MM-DD'));
+                    $('#valueSpend').val(spend.value);
+                } else {
+                    alert("You are not allowed to delete")
+                }
+            }
+        })
+
+        $('#submitEdit').click(function() {
+            const bodyReq = $('#editForm').serialize()
+            const spendId = $('#spendId').val()
+            $.ajax({
+                url: '/update-spending/' + spendId,
+                method: 'POST',
+                data: bodyReq,
+                success: function(res) {
+                    alert(res.message);
+                    window.location.reload();
+                },
+                error: function(xhr, status, error) {
+                    alert('Error updating spending: ' + xhr.responseText);
+                }
+            })
+            $('#myModal').addClass('hidden');
+        });
     })
 </script>

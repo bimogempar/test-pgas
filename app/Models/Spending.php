@@ -18,7 +18,7 @@ class Spending extends Model
 
     public function getSpendings()
     {
-        $spendings = Spending::with('employees')->orderBy('value', 'asc')->get();
+        $spendings = Spending::with('employees')->orderBy('value', 'asc')->orderBy('updated_at', 'asc')->get();
         return $spendings;
     }
 }

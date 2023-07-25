@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SpendingExport;
+use App\Models\Department;
+use App\Models\Employee;
 use App\Models\Spending;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class SpendingController extends Controller
 {
@@ -19,10 +22,12 @@ class SpendingController extends Controller
     public function getSpending()
     {
         $spendings = $this->spending->getSpendings();
+        $departments = Department::get();
+        $employees = Employee::get();
         foreach ($spendings as $spending) {
             $spending->date = Carbon::parse($spending->date)->format('d-F-Y');
         }
-        return view('components.spending', ['spendings' => $spendings]);
+        return view('components.spending', compact('departments', 'spendings', 'employees'));
     }
 
     public function getExportSpending()
@@ -51,10 +56,15 @@ class SpendingController extends Controller
         }
 
         $input = $request->validate([
-            'name' => 'required|string',
+            'spendId' => 'required',
+            'empId' => 'required',
+            'dateSpend' => 'required',
+            'valueSpend' => 'required',
         ]);
 
-        $spend->name = $input['name'];
+        $spend->employeeId = intval($input['empId']);
+        $spend->date = $input['dateSpend'];
+        $spend->value = $input['valueSpend'];
         $spend->save();
         return response()->json(['message' => 'Spending updated successfully.'], 200);
     }
