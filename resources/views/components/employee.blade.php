@@ -40,14 +40,13 @@
                     {{ $emp->departments->name }}
                 </td>
                 <td class="p-3">
-                    <a href="#" id="{{ $emp->id }}" class="view-emp text-gray-400 hover:text-gray-500 mr-2">
+                    <a id="{{ $emp->id }}" class="view-emp text-gray-400 hover:text-gray-500 mr-2">
                         <i class="material-icons-outlined text-base">visibility</i>
                     </a>
-                    <a href="#" id="{{ $emp->id }}" class="edit-emp text-gray-400 hover:text-gray-500  mx-2">
+                    <a id="{{ $emp }}" class="edit-emp openModalBtn text-gray-400 hover:text-gray-500  mx-2">
                         <i class="material-icons-outlined text-base">edit</i>
                     </a>
-                    <a href="#" id="{{ $emp->id }}"
-                        class="delete-emp text-gray-400 hover:text-gray-500  ml-2">
+                    <a id="{{ $emp->id }}" class="delete-emp text-gray-400 hover:text-gray-500  ml-2">
                         <i class="material-icons-round text-base">delete_outline</i>
                     </a>
                 </td>
@@ -55,6 +54,8 @@
         @endforeach
     </tbody>
 </table>
+
+@include('components.modal.editEmployee')
 
 <style>
     tr td:nth-child(n+3),
@@ -119,5 +120,33 @@
                 }
             }
         })
+
+        $('.edit-emp').on('click', function() {
+            if ("{{ auth()->check() }}") {
+                if ("{{ auth()->user()->role }}" == 'admin') {
+                    const emp = JSON.parse($(this).attr('id'));
+                    console.log(emp);
+                    $('#editName').val(emp.name);
+                    $('#editDepartmentId').val(emp.departmentId);
+                } else {
+                    alert("You are not allowed to update")
+                }
+            }
+        })
+
+        $('.openModalBtn').click(function() {
+            $('#myModal').removeClass('hidden');
+        });
+
+        $('#closeModalBtn').click(function() {
+            $('#myModal').addClass('hidden');
+        });
+
+        $('#submitEdit').click(function() {
+            $('#editForm').submit(function() {
+                console.log('click submitedit')
+            })
+            $('#myModal').addClass('hidden');
+        });
     })
 </script>

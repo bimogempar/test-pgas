@@ -11,7 +11,7 @@
                     <div>{{ auth()->user()->email }}</div>
                 @endif
                 <button id="doLogout"
-                    class="p-2 rounded-md bg-red-100 hover:bg-red-300 transition ease-in-out delay-100 ">Logout</button>
+                    class="p-2 rounded-md bg-red-400 text-white hover:bg-red-500 transition ease-in-out delay-100 ">Logout</button>
             </div>
         </div>
 
