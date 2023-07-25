@@ -35,10 +35,6 @@
                 </td>
                 <td class="p-3 ">
                     <a id="{{ $spd }}"
-                        class="view-spd hover:cursor-pointer text-gray-400 hover:text-gray-500 mr-2">
-                        <i class="material-icons-outlined text-base">visibility</i>
-                    </a>
-                    <a id="{{ $spd }}"
                         class="edit-spd hover:cursor-pointer openModalBtn text-gray-400 hover:text-gray-500  mx-2">
                         <i class="material-icons-outlined text-base">edit</i>
                     </a>
@@ -64,7 +60,7 @@
 <script>
     $(document).ready(function() {
         $('.openModalBtn').click(function() {
-            $('#myModal').removeClass('hidden');
+            editSpending();
         });
 
         $('#closeModalBtn').click(function() {
@@ -101,7 +97,7 @@
             }
         })
 
-        $('.edit-spd').on('click', function() {
+        function editSpending() {
             if ("{{ auth()->check() }}") {
                 if ("{{ auth()->user()->role }}" == 'admin') {
                     const spend = JSON.parse($(this).attr('id'));
@@ -111,11 +107,12 @@
                     $('#dateSpend').val(moment(spend.date, 'D-F-Y').format(
                         'YYYY-MM-DD'));
                     $('#valueSpend').val(spend.value);
+                    $('#myModal').removeClass('hidden');
                 } else {
-                    alert("You are not allowed to delete")
+                    alert("You are not allowed to update")
                 }
             }
-        })
+        }
 
         $('#submitEdit').click(function() {
             const bodyReq = $('#editForm').serialize()

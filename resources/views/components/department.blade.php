@@ -66,20 +66,17 @@
             }
         })
 
-        $('.edit-dept').on('click', function() {
+        $('.openModalBtn').click(function() {
             if ("{{ auth()->check() }}") {
                 if ("{{ auth()->user()->role }}" == 'admin') {
                     const dept = JSON.parse($(this).attr('id'));
                     $('#deptId').val(dept.id);
                     $('#editNameDept').val(dept.name);
+                    $('#myModal').removeClass('hidden');
                 } else {
-                    alert("You are not allowed to delete")
+                    alert("You are not allowed to update")
                 }
             }
-        })
-
-        $('.openModalBtn').click(function() {
-            $('#myModal').removeClass('hidden');
         });
 
         $('#closeModalBtn').click(function() {

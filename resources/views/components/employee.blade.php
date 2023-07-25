@@ -126,21 +126,18 @@
             }
         })
 
-        $('.edit-emp').on('click', function() {
+        $('.openModalBtn').click(function() {
             if ("{{ auth()->check() }}") {
                 if ("{{ auth()->user()->role }}" == 'admin') {
                     const emp = JSON.parse($(this).attr('id'));
                     $('#employeeId').val(emp.id);
                     $('#editName').val(emp.name);
                     $('#editDepartmentId').val(emp.departmentId);
+                    $('#myModal').removeClass('hidden');
                 } else {
                     alert("You are not allowed to update")
                 }
             }
-        })
-
-        $('.openModalBtn').click(function() {
-            $('#myModal').removeClass('hidden');
         });
 
         $('#closeModalBtn').click(function() {
